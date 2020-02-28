@@ -5,7 +5,7 @@
           alt="Angular Logo"
           src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
   />
-  <span>ng-todo-dragdrop</span>
+  <span>Shoppinglist</span>
   <div class="spacer"></div>
 </div>
 <div class="content">
@@ -14,14 +14,14 @@
     <form [formGroup]="shoppingForm">
       <mat-form-field class="example-full-width">
         <mat-label>add item</mat-label>
-        <input matInput placeholder="go shopping" formControlName="shoppingItemInput">
+        <input id="add-item-input" matInput placeholder="go shopping" formControlName="shoppingItemInput">
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="item-amount">
         <mat-label>item amount</mat-label>
-        <input matInput placeholder="go shopping" formControlName="shoppingItemAmount">
+        <input id="add-item-amount" matInput placeholder="go shopping" formControlName="shoppingItemAmount">
       </mat-form-field>
       <br>
-      <button mat-raised-button color="primary" class="button" type="submit" (click)="addItem(this.shoppingItemInput, this.shoppingItemAmount)">Add item</button>
+      <button id="add-item-action" mat-raised-button color="primary" class="button" type="submit" (click)="addItem(this.shoppingItemInput, this.shoppingItemAmount)">Add item</button>
     </form>
 
 
@@ -32,11 +32,11 @@
             class="todo-list"
             (cdkDropListDropped)="onDrop($event)">
       <div class="todo-block" *ngFor="let shoppingList of ShoppingList" cdkDrag>
-        <p>{{ shoppingList.title }}</p>
-        <button mat-flat-button color="primary" (click)="increaseItem(shoppingList)">+</button>
-        <p>{{ shoppingList.amount | json }}</p>
-        <button mat-flat-button color="accent" (click)="decreaseItem(shoppingList)">-</button>
-        <button mat-button color="warn" (click)="deleteItem(shoppingList)">delete</button>
+        <p class="item-title" id="{{ shoppingList.title }}-name">{{ shoppingList.title }}</p>
+        <button mat-flat-button color="primary" id="{{ shoppingList.title }}-increase-amount" (click)="increaseItem(shoppingList)">+</button>
+        <p id="{{ shoppingList.title }}-amount">{{ shoppingList.amount | json }}</p>
+        <button mat-flat-button color="accent" id="{{ shoppingList.title }}-decrease-amount" (click)="decreaseItem(shoppingList)">-</button>
+        <button mat-button color="warn" id="{{ shoppingList.title }}-delete-item" (click)="deleteItem(shoppingList)">delete</button>
       </div>
     </div>
   </div>
